@@ -1,0 +1,16 @@
+{
+    "Users": [
+        {
+            "username": "UserA",
+            "deviceid": "reefpi1",
+            "devicename": "Reef Raspberry Pi #1",
+            "accesskey": "xxxxxxxx"
+        },
+        {
+            "username": "UserB",
+            "deviceid": "xmaspi1",
+            "devicename": "The other pi",
+            "accesskey": "yyyyyyyyyyyy"
+        }
+    ]
+}

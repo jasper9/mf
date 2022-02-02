@@ -7,11 +7,14 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
 	"time"
 
 	"github.com/gorilla/mux"
 )
+
+const check_dir string = "/tmp/mfchecks/"
 
 // Users struct which contains
 // an array of users
@@ -110,7 +113,10 @@ func PostCheckIn(w http.ResponseWriter, r *http.Request) {
 
 				//err := os.WriteFile("./checks/"+checkid, sec, 0644)
 				//checkErr(err)
-				f, err := os.Create("./checks/" + u_deviceid + ".txt")
+
+				newpath := filepath.Join(check_dir)
+				err := os.MkdirAll(newpath, os.ModePerm)
+				f, err := os.Create(check_dir + u_deviceid + ".txt")
 				if err != nil {
 					log.Fatal(err)
 				}

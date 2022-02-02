@@ -13,17 +13,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-//const accesskey = "aiuui3hiu2hi2uh2iuh2iu2888828"
-
-/*
-type Configuration struct {
-	Users  []UserDetails `json:"lists"`
-	Groups []string      `json:"groups"`
-}
-
-type UserDetails struct {
-	key string `json:"key"`
-} */
+// example syntax with example creds
+// curl -X POST -d "deviceid=reefpi1&accesskey=aiuui3hiu2hi2uh2iuh2iu2888828" http://34.132.5.224/checkin/
 
 // Users struct which contains
 // an array of users
@@ -47,12 +38,10 @@ func main() {
 
 	// https://tutorialedge.net/golang/parsing-json-with-golang/
 	jsonFile, err := os.Open("config.json")
-	// if we os.Open returns an error then handle it
+
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("Successfully Opened users.json")
-	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
 
 	// read our opened jsonFile as a byte array.
@@ -77,7 +66,7 @@ func main() {
 	router := mux.NewRouter()
 
 	// Route handles & endpoints
-	router.HandleFunc("/hello/", GetHello).Methods("GET")
+	//router.HandleFunc("/hello/", GetHello).Methods("GET")
 	router.HandleFunc("/checkin/", PostCheckIn).Methods("POST")
 
 	// serve the app
@@ -100,11 +89,11 @@ func checkErr(err error) {
 	}
 }
 
-func GetHello(w http.ResponseWriter, r *http.Request) {
+//func GetHello(w http.ResponseWriter, r *http.Request) {
 
-	printMessage("Getting movies...")
+//	printMessage("Getting movies...")
 
-}
+//}
 
 func PostCheckIn(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("\n\n")
@@ -124,7 +113,7 @@ func PostCheckIn(w http.ResponseWriter, r *http.Request) {
 
 				//err := os.WriteFile("./checks/"+checkid, sec, 0644)
 				//checkErr(err)
-				f, err := os.Create("./checks/" + u_deviceid)
+				f, err := os.Create("./checks/" + u_deviceid + ".txt")
 				if err != nil {
 					log.Fatal(err)
 				}
@@ -147,26 +136,12 @@ func PostCheckIn(w http.ResponseWriter, r *http.Request) {
 			//fmt.Printf("u_deviceid = %v\n", u_deviceid)
 			//fmt.Printf("u_accesskey = %v\n", u_accesskey)
 
-		} else {
-			fmt.Println("Keys dont match")
-			//fmt.Printf("config key = %v\n", users.Users[i].Key)
-			//fmt.Printf("u_deviceid = %v\n", u_deviceid)
-			//fmt.Printf("u_accesskey = %v\n", u_accesskey)
-		}
+		} //else {
+		//	fmt.Println("Keys dont match")
+		//fmt.Printf("config key = %v\n", users.Users[i].Key)
+		//fmt.Printf("u_deviceid = %v\n", u_deviceid)
+		//fmt.Printf("u_accesskey = %v\n", u_accesskey)
+		//}
 	}
-
-	//if accesskey == u_accesskey {
-	//	fmt.Printf("Keys match!\n")
-	//}
-
-	//printMessage("Getting movies...")
-	//fmt.Printf("checkid = %v\n", checkid)
-	//fmt.Printf("accesskey = %v\n", u_accesskey)
-
-	//dat, err := os.ReadFile("test.txt")
-	//checkErr(err)
-	//fmt.Print(string(dat))
-
-	//d1 := []byte("hello\ngo\n")
 
 }

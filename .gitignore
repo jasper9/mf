@@ -17,4 +17,4 @@
 go.mod
 go.sum
 config.json
-checks/*
+checks/*.txt

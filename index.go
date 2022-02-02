@@ -13,9 +13,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// example syntax with example creds
-// curl -X POST -d "deviceid=reefpi1&accesskey=aiuui3hiu2hi2uh2iuh2iu2888828" http://34.132.5.224/checkin/
-
 // Users struct which contains
 // an array of users
 type Users struct {

@@ -35,12 +35,18 @@ var users Users
 
 // Main function
 func main() {
+	file, err := os.OpenFile("/var/log/mf.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.SetOutput(file)
 
 	// https://tutorialedge.net/golang/parsing-json-with-golang/
-	jsonFile, err := os.Open("config.json")
+	jsonFile, err := os.Open("/etc/mf/config.json")
 
 	if err != nil {
 		fmt.Println(err)
+		log.Println(err)
 	}
 	defer jsonFile.Close()
 
@@ -80,6 +86,7 @@ func printMessage(message string) {
 	fmt.Println("")
 	fmt.Println(message)
 	fmt.Println("")
+	log.Println(message)
 }
 
 // Function for handling errors
@@ -105,7 +112,7 @@ func PostCheckIn(w http.ResponseWriter, r *http.Request) {
 		if users.Users[i].AccessKey == u_accesskey {
 			if users.Users[i].DeviceID == u_deviceid {
 				fmt.Println("Keys and DeviceID match!")
-
+				log.Println(u_deviceid + "checked in.")
 				var sec int64
 				now := time.Now() // current local time
 				sec = now.Unix()

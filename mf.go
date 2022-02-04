@@ -112,7 +112,7 @@ func PostCheckIn(w http.ResponseWriter, r *http.Request) {
 		if users.Users[i].AccessKey == u_accesskey {
 			if users.Users[i].DeviceID == u_deviceid {
 				fmt.Println("Keys and DeviceID match!")
-				log.Println(u_deviceid + "checked in.")
+				log.Println(u_deviceid + " checked in")
 				var sec int64
 				now := time.Now() // current local time
 				sec = now.Unix()
